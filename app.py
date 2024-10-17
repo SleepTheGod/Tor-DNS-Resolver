@@ -30,12 +30,10 @@ def resolve_onion_site(onion_url):
     }
 
     try:
-        # Measure the time it takes to resolve the onion service
         start_time = time.time()
         response = session.get(onion_url, timeout=30)
         elapsed_time = time.time() - start_time
 
-        # Log success
         logging.info(f"Successfully resolved {onion_url} with status code {response.status_code}")
 
         return {
@@ -61,13 +59,10 @@ def resolve():
     if not onion_url or not onion_url.endswith('.onion'):
         return jsonify({"error": "Invalid .onion URL"}), 400
 
-    # Log the onion URL being resolved
     logging.info(f"Resolving .onion URL: {onion_url}")
 
-    # Renew Tor identity to ensure anonymity
     renew_tor_identity()
 
-    # Try to resolve the .onion website and fetch response info
     result = resolve_onion_site(onion_url)
 
     return jsonify(result)
