@@ -1,0 +1,4 @@
+ControlPort 9051
+SOCKSPort 9050
+HashedControlPassword <your_password_hash>
+CookieAuthentication 1
