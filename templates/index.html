@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tor DNS Resolver</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #282c34;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            color: #61dafb;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        input {
+            padding: 10px;
+            width: 300px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+
+        .response {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tor Service DNS Resolver</h1>
+        <form id="resolver-form">
+            <input type="text" name="onion_url" placeholder="Enter .onion URL">
+            <br>
+            <button type="submit">Resolve</button>
+        </form>
+        <div class="response" id="response"></div>
+    </div>
+
+    <script>
+        document.getElementById('resolver-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            fetch('/resolve', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const responseDiv = document.getElementById('response');
+                responseDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            })
+            .catch(err => console.error('Error:', err));
+        });
+    </script>
+</body>
+</html>
