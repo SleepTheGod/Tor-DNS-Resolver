@@ -21,3 +21,4 @@ http://www.socks24.org/feeds/posts/default
 https://www.proxy-list.download/api/v1/get?type=socks5
 https://www.proxyscan.io/download?type=socks5
 https://www.my-proxy.com/free-socks-5-proxy.html
+https://rcloak.com/api/proxies/raw?protocol=socks5
